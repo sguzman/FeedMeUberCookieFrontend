@@ -10,10 +10,9 @@ export class UberMapPage {
   items: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.items = this.navParams.get('data').items;
-    console.log(this.items);
   }
 
-  ionViewDidLoad() {
+  public static ionViewDidLoad() {
     console.log('ionViewDidLoad UberMapPage');
   }
 
