@@ -5,13 +5,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import {HttpClientModule} from "@angular/common/http";
+import {UberCookiePage} from "../pages/uber-cookie/uber-cookie";
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    UberCookiePage
   ],
   imports: [
     BrowserModule,
@@ -21,7 +21,7 @@ import {HttpClientModule} from "@angular/common/http";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    UberCookiePage
   ],
   providers: [
     StatusBar,
