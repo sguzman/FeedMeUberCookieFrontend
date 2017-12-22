@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {Subject} from "rxjs/Subject";
 import "rxjs/add/operator/mergeMap";
 import {Observable} from "rxjs/Observable";
@@ -15,10 +15,9 @@ export class UberCookiePage {
   cookie: string = '';
   submitSubject = new Subject();
   private url: string = 'http://localhost:8888';
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public loadingCtrl: LoadingController) {
     this.submitSubject.flatMap(s => this.get(this.cookie)).subscribe(
       s => {
-        console.log(s);
         this.navCtrl.push(UberMapPage, {
           data: s
         })
@@ -27,6 +26,11 @@ export class UberCookiePage {
   }
 
   public get(cookie: string): Observable<any> {
+    this.loadingCtrl.create({
+      dismissOnPageChange: true,
+      spinner: 'crescent',
+      content: 'Please wait...',
+    }).present();
     return this.http.get(this.url, {
       headers: new HttpHeaders()
         .set("X-Cookies", cookie)
