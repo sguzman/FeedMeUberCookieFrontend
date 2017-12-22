@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {UberCookiePage} from "../pages/uber-cookie/uber-cookie";
 import {UberMapPage} from "../pages/uber-map/uber-map";
+import {Geolocation} from "@ionic-native/geolocation";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {UberMapPage} from "../pages/uber-map/uber-map";
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
