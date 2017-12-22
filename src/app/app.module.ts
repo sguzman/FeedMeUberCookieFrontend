@@ -8,11 +8,13 @@ import { MyApp } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {UberCookiePage} from "../pages/uber-cookie/uber-cookie";
 import { UberDataProvider } from '../providers/uber-data/uber-data';
+import {UberMapPage} from "../pages/uber-map/uber-map";
 
 @NgModule({
   declarations: [
     MyApp,
-    UberCookiePage
+    UberCookiePage,
+    UberMapPage
   ],
   imports: [
     BrowserModule,
@@ -22,7 +24,8 @@ import { UberDataProvider } from '../providers/uber-data/uber-data';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    UberCookiePage
+    UberCookiePage,
+    UberMapPage
   ],
   providers: [
     StatusBar,
