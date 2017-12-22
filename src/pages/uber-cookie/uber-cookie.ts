@@ -2,29 +2,34 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Subject} from "rxjs/Subject";
 import "rxjs/add/operator/mergeMap";
-import {UberDataProvider} from "../../providers/uber-data/uber-data";
+import {Observable} from "rxjs/Observable";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {UberMapPage} from "../uber-map/uber-map";
 
 @IonicPage()
 @Component({
   selector: 'page-uber-cookie',
   templateUrl: 'uber-cookie.html',
-  providers: [UberDataProvider]
 })
 export class UberCookiePage {
   cookie: string = '';
-  data: any;
-  submitSubject = new Subject<string>();
-  constructor(public navCtrl: NavController, public navParams: NavParams, private uberD: UberDataProvider) {
-    this.submitSubject.flatMap(s => this.uberD.get(s)).subscribe(
-      s => this.data = s
+  submitSubject = new Subject();
+  private url: string = 'http://localhost:8888';
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient) {
+    this.submitSubject.flatMap(s => this.get(this.cookie)).subscribe(
+      s => {
+        console.log(s);
+        this.navCtrl.push(UberMapPage, {
+          data: s
+        })
+      }
     )
   }
 
-  public submit() {
-    this.submitSubject.next(this.cookie);
-    this.navCtrl.push(UberMapPage, {
-      data: this.data
+  public get(cookie: string): Observable<any> {
+    return this.http.get(this.url, {
+      headers: new HttpHeaders()
+        .set("X-Cookies", cookie)
     })
   }
 
