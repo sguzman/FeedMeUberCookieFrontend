@@ -1,24 +1,29 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the UberCookiePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {Subject} from "rxjs/Subject";
+import "rxjs/add/operator/mergeMap";
+import {UberDataProvider} from "../../providers/uber-data/uber-data";
 
 @IonicPage()
 @Component({
   selector: 'page-uber-cookie',
   templateUrl: 'uber-cookie.html',
+  providers: [UberDataProvider]
 })
 export class UberCookiePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  cookie: string = '';
+  submitSubject = new Subject<string>();
+  constructor(public navCtrl: NavController, public navParams: NavParams, private uberD: UberDataProvider) {
+    this.submitSubject.flatMap(s => this.uberD.get(s)).subscribe(
+      s => console.log(s)
+    )
   }
 
-  ionViewDidLoad() {
+  public submit() {
+    this.submitSubject.next(this.cookie);
+  }
+
+  public static ionViewDidLoad() {
     console.log('ionViewDidLoad UberCookiePage');
   }
 

@@ -1,17 +1,19 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Observable} from "rxjs/Observable";
 
-/*
-  Generated class for the UberDataProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class UberDataProvider {
-
-  constructor(public http: HttpClient) {
+  private url: string = 'http://localhost:8888';
+  constructor(private http: HttpClient) {
     console.log('Hello UberDataProvider Provider');
+  }
+
+  public get(cookie: string): Observable<any> {
+    return this.http.get(this.url, {
+      headers: new HttpHeaders()
+        .set("X-Cookies", cookie)
+    })
   }
 
 }
