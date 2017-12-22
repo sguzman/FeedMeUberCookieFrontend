@@ -20,7 +20,7 @@
       <ion-input [(ngModel)]="cookie"></ion-input>
     </ion-item>
     <ion-item>
-      <button full large outline ion-button (click)="submit()" color="primary">Submit</button>
+      <button full large outline ion-button [disabled]="cookie.length === 0" (click)="submit()" color="primary">Submit</button>
     </ion-item>
   </ion-list>
 </ion-content>
