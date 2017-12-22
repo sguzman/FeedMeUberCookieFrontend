@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {UberCookiePage} from "../pages/uber-cookie/uber-cookie";
+import { UberDataProvider } from '../providers/uber-data/uber-data';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {UberCookiePage} from "../pages/uber-cookie/uber-cookie";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UberDataProvider
   ]
 })
 export class AppModule {}
